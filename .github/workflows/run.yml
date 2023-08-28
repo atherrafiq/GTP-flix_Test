@@ -1,3 +1,12 @@
-env:
-  PINECONE_API_KEY: ${{ secrets.PINECONE_API_KEY }}
-  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+jobs:
+  my_job:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: Run Python script
+      run: python main.py
+      env:
+        PINECONE_API_KEY: ${{ secrets.PINECONE_API_KEY }}
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
