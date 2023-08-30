@@ -36,7 +36,7 @@ def randomize_array(arr):
 
 st.set_page_config(page_title="GPTflix", page_icon="🍿", layout="wide")
 
-st.header("GPTflix is like chatGPT for movie reviews!🍿\n")
+st.header("GPTProducts is like chatGPT for products reviews!🍿\n")
 
 
 # Storing the chat
