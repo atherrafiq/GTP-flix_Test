@@ -196,7 +196,7 @@ def summarize_past_conversation(content):
         "model": COMPLETIONS_MODEL,
     }
 
-    prompt = "Summarize this discussion into a single paragraph keeping the titles of any movies mentioned: \n" + content
+    prompt = "Summarize this discussion into a single paragraph keeping the titles of any products mentioned: \n" + content
 
     try:
         response = openai.Completion.create(
