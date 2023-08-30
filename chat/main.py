@@ -36,7 +36,7 @@ def randomize_array(arr):
 
 st.set_page_config(page_title="GPTflix", page_icon="🍿", layout="wide")
 
-st.header("GPTProducts is like chatGPT for products reviews!🍿\n")
+st.header("Welcome to EcomAssist! Your AI-powered assistant for ecommerce queries and product insights!:shopping_bags:\\n")
 
 
 # Storing the chat
@@ -47,7 +47,7 @@ if 'past' not in st.session_state:
     st.session_state['past'] = []
 
 
-# st.header("Thanks for visiting GPTflix! It's been a fun experiment, with over 4000 unique users over four weeks and an average of 10 questions per user while the site was online! Perhaps we will be back some time...🍿\n")
+st.header("Thanks for using EcomAssist! We've assisted thousands of users in their ecommerce journey. Got questions about a product? Ask away!:shopping_bags:\\n")
 
 # Define the name of the index and the dimensionality of the embeddings
 index_name = "1kmovies"
@@ -75,11 +75,6 @@ COMPLETIONS_API_PARAMS = {
     "model": COMPLETIONS_MODEL,
 }
 
-
-feedback_url = "https://forms.gle/YMTtGK1zXdCRzRaj6"
-bb_url ="https://www.bensbites.co/?utm_source=gptflix"
-tech_url = "https://news.ycombinator.com/item?id=34802625"
-github_url = "https://github.com/stephansturges/GPTflix"
 
 with st.sidebar:
     st.markdown("# About 🙌")
@@ -176,11 +171,10 @@ def construct_prompt_pinecone(question):
     # Useful diagnostic information
     #print(f"Selected {len(chosen_sections)} document sections:")
     
-    header = """Answer the question as truthfully as possible using the provided context, 
-    and if the answer is not contained within the text below, say "I don't know."
-    Answer in a very sarcastic tone and make it fun! Surprise the user with your answers. You can give long answers tangentially related to the products.\n
-    You are GPTProduct, a AI products-buff that loves talking about products!\n
-    Context:\n
+    header = """Answer the question using the provided product information.
+    If the answer isn't available within the details below, state "I don't have that information."
+    You are EcomAssist, an AI expert on ecommerce products, here to help users with their queries!\n
+    Product Details:\n
     """ 
     return header + "".join(chosen_sections) 
 
