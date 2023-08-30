@@ -8,18 +8,17 @@ from streamlit_chat import message
 import pinecone
 import random
 from PIL import Image
-# from dotenv import load_dotenv
-# load_dotenv()
+from dotenv import load_dotenv
+load_dotenv()
 
-pinecone_api_key = os.environ.get("PINECONE_API_KEY")
-openai_api_key = os.environ.get("OPENAI_API_KEY")
+pinecone_api_key = os.getenv("PINECONE_API_KEY")
+openai_api_key = os.getenv("OPENAI_API_KEY")
 
 pinecone.init(api_key=pinecone_api_key, environment="us-west4-gcp-free")
 openai.api_key = openai_api_key
 
-
-gptflix_logo = Image.open('./chat/logo.png')
-bens_bites_logo = Image.open('./chat/Bens_Bites_Logo.jpg')
+gptflix_logo = Image.open('logo.png')
+bens_bites_logo = Image.open('Bens_Bites_Logo.jpg')
 
 # random user picture
 user_av = random.randint(0, 100)
@@ -80,13 +79,13 @@ COMPLETIONS_API_PARAMS = {
 feedback_url = "https://forms.gle/YMTtGK1zXdCRzRaj6"
 bb_url ="https://www.bensbites.co/?utm_source=gptflix"
 tech_url = "https://news.ycombinator.com/item?id=34802625"
-github_url = "https://github.com/esidedbusiness/GPTFLixRepo"
+github_url = "https://github.com/stephansturges/GPTflix"
 
 with st.sidebar:
     st.markdown("# About 🙌")
     st.markdown(
-        "GPTflix allows you to talk to version of chatGPT \n"
-        "that has access to reviews of about 10 000 movies! 🎬 \n"
+        "GPTProducts allows you to talk to version of chatGPT \n"
+        "that has access to reviews of about 10 000 products! 🎬 \n"
         "Holy smokes, chatGPT and 10x cheaper??! We are BACK! 😝\n"
         )
     st.markdown(
@@ -94,15 +93,15 @@ with st.sidebar:
         "and will only answer from injected knowlege 👩‍🏫 \n"
     )
     st.markdown("---")
-    st.markdown("A side project by Stephan Sturges")
-    st.markdown("Kept online by [Ben's Bites](%s)!" %bb_url)
+    st.markdown("A side project by Esided")
+    st.markdown("Kept online by Esided")
     st.image(bens_bites_logo, width=60)
 
     st.markdown("---")
-    st.markdown("Tech [info](%s) for you nerds out there!" %tech_url)
-    st.markdown("Give feedback [here](%s)" %feedback_url)
+    st.markdown("Tech [info] for you nerds out there!")
+    st.markdown("Give feedback")
     st.markdown("---")
-    st.markdown("Code open-sourced [here](%s)" %github_url)
+    st.markdown("Code open-sourced")
     st.markdown("---")
 
 
@@ -179,8 +178,8 @@ def construct_prompt_pinecone(question):
     
     header = """Answer the question as truthfully as possible using the provided context, 
     and if the answer is not contained within the text below, say "I don't know."
-    Answer in a very sarcastic tone and make it fun! Surprise the user with your answers. You can give long answers tangentially related to the movie.\n
-    You are GPTflix, a AI movie-buff that loves talking about movies!\n
+    Answer in a very sarcastic tone and make it fun! Surprise the user with your answers. You can give long answers tangentially related to the products.\n
+    You are GPTProduct, a AI products-buff that loves talking about products!\n
     Context:\n
     """ 
     return header + "".join(chosen_sections) 
@@ -232,7 +231,7 @@ def answer_query_with_context_pinecone(query):
     print("---------------------------------------------")
     try:
         response = openai.ChatCompletion.create(
-                    messages=[{"role": "system", "content": "You are a helpful AI who loves movies."},
+                    messages=[{"role": "system", "content": "You are a helpful AI who loves Products."},
                             {"role": "user", "content": str(prompt)}],
                             # {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
                             # {"role": "user", "content": "Where was it played?"}
@@ -256,7 +255,7 @@ def clear_text():
 
 # We will get the user's input by calling the get_text function
 def get_text():
-    input_text = st.text_input("Input a question here! For example: \"Is X movie good?\". \n It works best if your question contains the title of a movie! You might want to be really specific, like talking about Pixar's Brave rather than just Brave. Also, I have no memory of previous questions!😅😊","Who are you?", key="input")
+    input_text = st.text_input("Input a question here! For example: \"Is X product good?\". \n It works best if your question contains the title of a product! You might want to be really specific. Also, I have no memory of previous questions!😅😊", "Who are you?", key="input")
     return input_text
 
 
